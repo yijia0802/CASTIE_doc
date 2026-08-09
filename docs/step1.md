@@ -6,7 +6,7 @@ nav_order: 1
 permalink: /docs/step1/
 ---
 
-# SAIGE-QTL Dynamic Step 1
+# CASTIE Step 1
 
 Step 1 fits the null Poisson mixed model for each gene across cells.
 
