@@ -1,0 +1,21 @@
+title: CASTIE
+description: Documentation for CASTIE
+
+url: "https://yijia0802.github.io"
+baseurl: "/CASTIE_doc"
+
+remote_theme: just-the-docs/just-the-docs
+
+plugins:
+  - jekyll-remote-theme
+
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  "CASTIE on GitHub":
+    - "https://github.com/yijia0802/CASTIE_doc"
+
+aux_links_new_tab: true
+
+footer_content: "CASTIE documentation"

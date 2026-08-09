@@ -1,0 +1,1 @@
+awk 'NR==1 || ($2 > 0.05 && $2 < 0.95)' split_file.txt > filtered_maf_split_file.txt
