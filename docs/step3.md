@@ -6,7 +6,7 @@ nav_order: 3
 permalink: /docs/step3/
 ---
 
-# SAIGE-QTL Dynamic Step 3
+# CASTIE Step 3
 
  Step 3 combines p-values using cauchy combination/ACAT test to obtain gene-level p-values.
 
