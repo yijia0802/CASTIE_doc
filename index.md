@@ -10,15 +10,11 @@ permalink: /
 # CASTIE
 
 CASTIE (Context-Aware Single-cell Tool for Investigating regulatory Effects) builds on the SAIGE methods, facilitates the analysis of heterogeneous genetic effects across different cell level and donor contexts directly from single-cell data efficiently, eliminating the need for pseudobulk aggregation.
-
-<img src="{{ site.baseurl }}/assets/img/CASTIE_overview.jpeg"
-     alt="CASTIE Framework">
-
+<img src="{{ site.baseurl }}/img/CASTIE_overview.jpeg"
+     alt="CASTIE overview">
 ## Analysis Workflow
-
-<img src="{{ site.baseurl }}/assets/img/CASTIE_steps.jpeg"
+<img src="{{ site.baseurl }}/img/CASTIE_steps.jpeg"
      alt="CASTIE workflow overview showing the multi-step analysis pipeline">
-
 ## Docker Installation
 
 ### Prerequisites
