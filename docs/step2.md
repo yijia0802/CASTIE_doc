@@ -6,7 +6,7 @@ nav_order: 2
 permalink: /docs/step2/
 ---
 
-# SAIGE-QTL Dynamic Step 2
+# CASTIE Step 2
 
 Step 2 performs association test for each genetic marker (apply SKAT test for combining all interaction effects).
 
