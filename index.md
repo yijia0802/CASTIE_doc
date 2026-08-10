@@ -124,23 +124,25 @@ docker run --rm --platform linux/amd64 \
   -w /app/tutorial \
   yijia0802/castie:Latest \
   bash -lc '
-    step3_gene_pvalue_qtl.R \
-      --assocFile=output/gene_1_cis \
-      --geneName=gene_1 \
-      --genePval_outputFile=output/gene_1_gene_pvalue.tsv
-
+    # Prepare the combined, MAF-filtered Step 2 table for Step 3.
     Rscript -e '\''
       library(data.table)
-      result <- fread("output/gene_1_gene_pvalue.tsv")
-      setnames(result, "gene", "Gene")
-      result[, pval_column := "pval_main"]
-      setcolorder(result, c("Gene", "pval_column", "ACAT_p",
-                            "top_MarkerID", "top_pval"))
-      fwrite(result, "output/step3_longformat.txt", sep = "\t")
+      result <- fread("output/gene_1_cis")
+      dynamic_p <- tstrsplit(result$pval_ge, ",", fixed = TRUE)
+      result[, pf1 := dynamic_p[[1]]]
+      result[, pf2 := dynamic_p[[2]]]
+      result <- result[AF_Allele2 > 0.05 & AF_Allele2 < 0.95,
+                       .(Gene = "gene_1", MarkerID, AF_Allele2,
+                         pval_main = p.value, pf1, pf2)]
+      fwrite(result, "output/step3_input.txt", sep = "\t")
     '\''
 
+    step3_gene_pvalue.R \
+      --input=output/step3_input.txt \
+      --outdir=output/step3
+
     step4_get_egenes.R \
-      --input=output/step3_longformat.txt \
+      --input=output/step3/step3_longformat.txt \
       --outdir=output/step4 \
       --fdr=0.05
   '
@@ -236,23 +238,24 @@ step2_tests_qtl.R \
   <div class="castie-tab-panel" data-tab-panel="pixi-step34" hidden markdown="1">
 
 ```bash
-step3_gene_pvalue_qtl.R \
-  --assocFile=output/gene_1_cis \
-  --geneName=gene_1 \
-  --genePval_outputFile=output/gene_1_gene_pvalue.tsv
-
 Rscript -e '
   library(data.table)
-  result <- fread("output/gene_1_gene_pvalue.tsv")
-  setnames(result, "gene", "Gene")
-  result[, pval_column := "pval_main"]
-  setcolorder(result, c("Gene", "pval_column", "ACAT_p",
-                        "top_MarkerID", "top_pval"))
-  fwrite(result, "output/step3_longformat.txt", sep = "\t")
+  result <- fread("output/gene_1_cis")
+  dynamic_p <- tstrsplit(result$pval_ge, ",", fixed = TRUE)
+  result[, pf1 := dynamic_p[[1]]]
+  result[, pf2 := dynamic_p[[2]]]
+  result <- result[AF_Allele2 > 0.05 & AF_Allele2 < 0.95,
+                   .(Gene = "gene_1", MarkerID, AF_Allele2,
+                     pval_main = p.value, pf1, pf2)]
+  fwrite(result, "output/step3_input.txt", sep = "\t")
 '
 
+step3_gene_pvalue.R \
+  --input=output/step3_input.txt \
+  --outdir=output/step3
+
 step4_get_egenes.R \
-  --input=output/step3_longformat.txt \
+  --input=output/step3/step3_longformat.txt \
   --outdir=output/step4 \
   --fdr=0.05
 ```

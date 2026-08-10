@@ -16,12 +16,16 @@ The tested commands are available together in the **Step 3 + 4** tabs on the
 [CASTIE home page]({{ '/' | relative_url }}) for both container and Pixi
 installations.
 
-For a real multi-gene dynamic analysis, use `step3_0.2.5.7.R` to create
+For a real multi-gene dynamic analysis, use `step3_gene_pvalue.R` to create
 `step3_longformat.txt`, then run:
 
 ```bash
+step3_gene_pvalue.R \
+  --input=/path/to/combined_filtered_step2_results.txt \
+  --outdir=/path/to/step3
+
 step4_get_egenes.R \
-  --input=/path/to/step3_longformat.txt \
+  --input=/path/to/step3/step3_longformat.txt \
   --outdir=/path/to/step4 \
   --fdr=0.05
 ```
