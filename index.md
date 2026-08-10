@@ -26,7 +26,7 @@ CASTIE (Context-Aware Single-cell Tool for Investigating regulatory Effects) bui
 The pre-built Docker image can be pulled directly from Docker Hub:
 
 ```bash
-docker pull yijia0802/castie:Latest
+docker pull --platform linux/amd64 yijia0802/castie:Latest
 ```
 
 CASTIE consists of three steps. Step 1 fits the null model, Step 2 obtains variant-level summary statistics for each gene, and Step 3 uses the ACAT method to calculate gene-level p-values. I’ve attached example shell scripts for running all three steps. Steps 1 and 2 can be executed directly within the Docker container. 
