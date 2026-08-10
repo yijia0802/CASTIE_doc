@@ -1,0 +1,41 @@
+.castie-tabs {
+  margin: 1.25rem 0 2rem;
+}
+
+.castie-tab-list {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.castie-tab-list button {
+  appearance: none;
+  margin: 0 0 -1px;
+  padding: 0.65rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.35rem 0.35rem 0 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.castie-tab-list button:hover,
+.castie-tab-list button:focus-visible {
+  background: #f5f6fa;
+}
+
+.castie-tab-list button[aria-selected="true"] {
+  border-color: #d8d8d8 #d8d8d8 #fff;
+  background: #fff;
+  color: #4f46e5;
+}
+
+.castie-tab-panel {
+  padding-top: 1rem;
+}
+
+.castie-tab-panel[hidden] {
+  display: none;
+}
