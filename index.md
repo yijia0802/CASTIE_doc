@@ -124,18 +124,14 @@ docker run --rm --platform linux/amd64 \
   -w /app/tutorial \
   yijia0802/castie:Latest \
   bash -lc '
-    # Prepare the combined, MAF-filtered Step 2 table for Step 3.
-    Rscript -e '\''
-      library(data.table)
-      result <- fread("output/gene_1_cis")
-      dynamic_p <- tstrsplit(result$pval_ge, ",", fixed = TRUE)
-      result[, pf1 := dynamic_p[[1]]]
-      result[, pf2 := dynamic_p[[2]]]
-      result <- result[AF_Allele2 > 0.05 & AF_Allele2 < 0.95,
-                       .(Gene = "gene_1", MarkerID, AF_Allele2,
-                         pval_main = p.value, pf1, pf2)]
-      fwrite(result, "output/step3_input.txt", sep = "\t")
-    '\''
+    concat_step2_results.py \
+      --input-dir=output \
+      --output=output/step3_input.txt \
+      --contexts=pf1,pf2 \
+      --file-pattern="*_cis" \
+      --gene-regex="^(?P<gene>.+)_cis$" \
+      --maf-min=0.05 \
+      --maf-max=0.95
 
     step3_gene_pvalue.R \
       --input=output/step3_input.txt \
@@ -238,17 +234,14 @@ step2_tests_qtl.R \
   <div class="castie-tab-panel" data-tab-panel="pixi-step34" hidden markdown="1">
 
 ```bash
-Rscript -e '
-  library(data.table)
-  result <- fread("output/gene_1_cis")
-  dynamic_p <- tstrsplit(result$pval_ge, ",", fixed = TRUE)
-  result[, pf1 := dynamic_p[[1]]]
-  result[, pf2 := dynamic_p[[2]]]
-  result <- result[AF_Allele2 > 0.05 & AF_Allele2 < 0.95,
-                   .(Gene = "gene_1", MarkerID, AF_Allele2,
-                     pval_main = p.value, pf1, pf2)]
-  fwrite(result, "output/step3_input.txt", sep = "\t")
-'
+concat_step2_results.py \
+  --input-dir=output \
+  --output=output/step3_input.txt \
+  --contexts=pf1,pf2 \
+  --file-pattern='*_cis' \
+  --gene-regex='^(?P<gene>.+)_cis$' \
+  --maf-min=0.05 \
+  --maf-max=0.95
 
 step3_gene_pvalue.R \
   --input=output/step3_input.txt \
