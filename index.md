@@ -31,6 +31,8 @@ simulated tutorial. No source checkout or compilation is required.
 ### Docker
 
 ```bash
+docker login
+
 #Intel/AMD Linux host
 docker pull yijia0802/castie:Latest
 
