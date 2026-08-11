@@ -22,9 +22,14 @@ Important inputs:
 - `--phenoCol`: gene or phenotype being modeled
 - `--sampleCovarColList`: donor-level covariates
 - `--dynamicCovarColList`: cell-level contexts used to construct `eMat`
-- `--plinkFile`: LD-pruned PLINK prefix used for the GRM and variance ratios
+- `--covarColList`: covariates need to be adjusted (e.g. batch, genetic PCs); must also include all covariates from sample + dynamic
+- `--plinkFile`: LD-pruned PLINK prefix, recommend randomly selecting 3000 markers for computational efficiency in step 1
 - `--outputPrefix`: prefix for the model and variance-ratio outputs
-
+- `--tauInit=1,0.1,0`: please set as shown (default), initial tau values for random effects
+- `--nThreads`: for algorithm parallel, can set accordingly based on cluster performance
+- `--offsetCol`: we recommend to model log of total cell read counts as an offset.
+- `--usePCG=FALSE`: please set as shown (default)
+  
 The tutorial uses `X1,X2` as donor-level covariates and `pf1,pf2` as dynamic
 cell-level covariates.
 
