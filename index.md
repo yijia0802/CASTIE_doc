@@ -104,8 +104,8 @@ docker run --rm --platform linux/amd64 \
     --famFile=data/genotypes.fam \
     --SAIGEOutputFile=output/gene_1_cis \
     --chrom=1 \
-    --minMAF=0 \
-    --minMAC=1 \
+    --minMAF=0.05 \
+    --minMAC=20 \
     --LOCO=FALSE \
     --GMMATmodelFile=output/gene_1.rda \
     --SPAcutoff=2 \
@@ -175,8 +175,7 @@ cd tutorial
 ```
 
 For non-interactive HPC jobs, use `pixi run --manifest-path=/path/to/CASTIE/pixi.toml COMMAND`
-instead of `pixi shell`. The `--library` option is unnecessary because CASTIE
-is installed in the Pixi environment.
+instead of `pixi shell`. 
 
 <div class="castie-tabs" data-tabs markdown="1">
   <div class="castie-tab-list" role="tablist" aria-label="Pixi tutorial steps">
