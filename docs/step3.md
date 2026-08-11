@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Step 3 + 4
+title: Step 3 (+ 4)
 parent: CASTIE
 nav_order: 3
 permalink: /docs/step3/
