@@ -31,12 +31,14 @@ simulated tutorial. No source checkout or compilation is required.
 ### Docker
 
 ```bash
+#Intel/AMD Linux host
 docker pull yijia0802/castie:Latest
+
+#Apple Silicon
+docker pull --platform linux/amd64 yijia0802/castie:Latest
+
 mkdir -p castie_tutorial_output
 ```
-
-On Apple Silicon, please use `docker pull --platform linux/amd64 yijia0802/castie:Latest`. It can usually be omitted on
-an Intel/AMD Linux host.
 
 ### Singularity or Apptainer
 
