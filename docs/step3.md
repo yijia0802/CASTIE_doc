@@ -41,6 +41,12 @@ step4_get_egenes.R \
   --fdr=0.05
 ```
 
+Both tab-delimited text and Parquet Step 2 outputs are supported and detected
+automatically. Select them with `--file-pattern='*.txt'` or
+`--file-pattern='*.parquet'`, respectively, and use the same extension in
+`--gene-regex`. You can override detection with `--input-format=txt` or
+`--input-format=parquet`.
+
 Step 4 expects `Gene`, `pval_column`, and `ACAT_p`. It writes per-context eGene
 tables and gene lists, plus context-union, context-only, and shared-context
 summaries.
