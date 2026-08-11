@@ -105,7 +105,7 @@ docker run --rm --platform linux/amd64 \
     --SAIGEOutputFile=output/gene_1_cis \
     --chrom=1 \
     --minMAF=0.05 \
-    --minMAC=20 \
+    --minMAC=5 \
     --LOCO=FALSE \
     --GMMATmodelFile=output/gene_1.rda \
     --SPAcutoff=2 \
