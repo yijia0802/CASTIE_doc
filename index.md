@@ -42,6 +42,18 @@ docker pull --platform linux/amd64 yijia0802/castie:Latest
 mkdir -p castie_tutorial_output
 ```
 
+#### Run the entire tutorial at once
+
+```bash
+docker run --rm --platform linux/amd64 \
+  -v "$PWD/castie_tutorial_output:/app/tutorial/output" \
+  yijia0802/castie:Latest \
+  bash /app/tutorial/run_tutorial_in_container.sh
+```
+
+The completed tutorial results will be available on the host in
+`castie_tutorial_output/`.
+
 ### Singularity or Apptainer
 
 ```bash
@@ -50,7 +62,9 @@ mkdir -p castie_tutorial_output
 ```
 
 Use `singularity` in place of `apptainer` when that is the command provided by
-your HPC system. To run the entire bundled tutorial at once:
+your HPC system.
+
+#### Run the entire tutorial at once
 
 ```bash
 apptainer exec \
@@ -59,8 +73,116 @@ apptainer exec \
   bash /app/tutorial/run_tutorial_in_container.sh
 ```
 
+The completed tutorial results will be available on the host in
+`castie_tutorial_output/`.
+
+#### Run the Apptainer/Singularity steps separately
+
+Run the tabs in order. Each command uses the tutorial data bundled inside the
+image and saves its results in the host directory `castie_tutorial_output/`.
+
 <div class="castie-tabs" data-tabs markdown="1">
-  <div class="castie-tab-list" role="tablist" aria-label="Container tutorial steps">
+  <div class="castie-tab-list" role="tablist" aria-label="Apptainer tutorial steps">
+    <button type="button" role="tab" aria-selected="true" data-tab-target="apptainer-step1">Step 1</button>
+    <button type="button" role="tab" aria-selected="false" data-tab-target="apptainer-step2">Step 2</button>
+    <button type="button" role="tab" aria-selected="false" data-tab-target="apptainer-step34">Step 3 + 4</button>
+  </div>
+
+  <div class="castie-tab-panel" data-tab-panel="apptainer-step1" markdown="1">
+
+```bash
+apptainer exec \
+  --bind "$PWD/castie_tutorial_output:/app/tutorial/output" \
+  --pwd /app/tutorial \
+  CASTIE.sif \
+  step1_fitNULLGLMM_qtl.R \
+    --useSparseGRMtoFitNULL=FALSE \
+    --useGRMtoFitNULL=FALSE \
+    --phenoFile=data/phenotypes.tsv \
+    --phenoCol=gene_1 \
+    --covarColList=X1,X2,pf1,pf2 \
+    --sampleCovarColList=X1,X2 \
+    --dynamicCovarColList=pf1,pf2 \
+    --sampleIDColinphenoFile=IND_ID \
+    --traitType=count \
+    --outputPrefix=output/gene_1 \
+    --skipVarianceRatioEstimation=FALSE \
+    --isRemoveZerosinPheno=FALSE \
+    --isCovariateOffset=FALSE \
+    --isCovariateTransform=TRUE \
+    --skipModelFitting=FALSE \
+    --tol=0.00001 \
+    --plinkFile=data/grm_variants \
+    --IsOverwriteVarianceRatioFile=TRUE
+```
+
+  </div>
+  <div class="castie-tab-panel" data-tab-panel="apptainer-step2" hidden markdown="1">
+
+```bash
+apptainer exec \
+  --bind "$PWD/castie_tutorial_output:/app/tutorial/output" \
+  --pwd /app/tutorial \
+  CASTIE.sif \
+  step2_tests_qtl.R \
+    --bedFile=data/genotypes.bed \
+    --bimFile=data/genotypes.bim \
+    --famFile=data/genotypes.fam \
+    --SAIGEOutputFile=output/gene_1_cis \
+    --chrom=1 \
+    --minMAF=0.05 \
+    --minMAC=5 \
+    --LOCO=FALSE \
+    --GMMATmodelFile=output/gene_1.rda \
+    --SPAcutoff=2 \
+    --varianceRatioFile=output/gene_1.varianceRatio.txt \
+    --rangestoIncludeFile=data/gene_1_region.tsv \
+    --markers_per_chunk=1000 \
+    --output_format=txt
+```
+
+  </div>
+  <div class="castie-tab-panel" data-tab-panel="apptainer-step34" hidden markdown="1">
+
+```bash
+apptainer exec \
+  --bind "$PWD/castie_tutorial_output:/app/tutorial/output" \
+  --pwd /app/tutorial \
+  CASTIE.sif \
+  bash -lc '
+    concat_step2_results.py \
+      --input-dir=output \
+      --output=output/step3_input.txt \
+      --contexts=pf1,pf2 \
+      --file-pattern="*_cis" \
+      --gene-regex="^(?P<gene>.+)_cis$" \
+      --maf-min=0.05 \
+      --maf-max=0.95
+
+    step3_gene_pvalue.R \
+      --input=output/step3_input.txt \
+      --outdir=output/step3
+
+    step4_get_egenes.R \
+      --input=output/step3/step3_longformat.txt \
+      --outdir=output/step4 \
+      --fdr=0.05
+  '
+```
+
+  </div>
+</div>
+
+If your system provides `singularity`, replace the word `apptainer` with
+`singularity` in these commands; all other arguments remain the same.
+
+### Docker: run the steps separately
+
+Run the tabs in order. Each Docker invocation uses the tutorial data bundled
+inside the image and saves its results in `castie_tutorial_output/`.
+
+<div class="castie-tabs" data-tabs markdown="1">
+  <div class="castie-tab-list" role="tablist" aria-label="Docker tutorial steps">
     <button type="button" role="tab" aria-selected="true" data-tab-target="container-step1">Step 1</button>
     <button type="button" role="tab" aria-selected="false" data-tab-target="container-step2">Step 2</button>
     <button type="button" role="tab" aria-selected="false" data-tab-target="container-step34">Step 3 + 4</button>
@@ -150,10 +272,6 @@ docker run --rm --platform linux/amd64 \
 
   </div>
 </div>
-
-For Singularity/Apptainer, the commands inside each tab are the same. Replace
-the `docker run` wrapper with `apptainer exec`, bind the output directory to
-`/app/tutorial/output`, and run from `/app/tutorial`.
 
 ## Option B — source installation with Pixi (Linux and macOS)
 
