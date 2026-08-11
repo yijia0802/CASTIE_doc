@@ -96,11 +96,11 @@ step1_fitNULLGLMM_qtl.R  \
     --tol=0.00001   \
     --plinkFile=/path/to/your/genotype/pruned_random_3000 \
     --IsOverwriteVarianceRatioFile=TRUE	\
-	  --maxiterPCG=500	\
-	  --isStoreSigma=TRUE	\
-	  --tauInit=1,0.1,0	\
-	  --maxiter=500	\
-	  --nThreads=4	\
+    --maxiterPCG=500	\
+    --isStoreSigma=TRUE	\
+    --tauInit=1,0.1,0	\
+    --maxiter=500	\
+    --nThreads=4	\
     --covarColList=age,sex,pc1,pc2,pc3,pc4,pc5,pc6,pf1,pf2,CD4.Naive,CD4.CM,Th1.Like,Th2.Resting,Th2.Activated,Th17.Activated,Th22,Tfh.1,Tfh.2,Tph,CD8.EM,CD8.Trm,TEMRA,MAIT,Cytotoxic,Exhaustion,CellCycle.S,CellCycle.G2M \
 	  --dynamicCovarColList=age,sex,CD4.Naive,CD4.CM,Th1.Like,Th2.Resting,Th2.Activated,Th17.Activated,Th22,Tfh.1,Tfh.2,Tph,CD8.EM,CD8.Trm,TEMRA,MAIT,Cytotoxic,Exhaustion,CellCycle.S,CellCycle.G2M \
 	  --offsetCol=log_total_read_counts \
