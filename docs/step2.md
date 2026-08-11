@@ -22,6 +22,8 @@ Important inputs:
 - `--varianceRatioFile`: Step 1 variance-ratio file
 - `--rangestoIncludeFile`: chromosome, start, and end interval
 - `--SAIGEOutputFile`: output path for variant-level results
+- `--output_format`: output format, default = parquet, can switch to txt
+- `--minMAF=0.05`: please set for common variants only
 
 Main-effect results use `BETA`, `SE`, and `p.value`. Dynamic interaction
 results follow the order of `--dynamicCovarColList` supplied in Step 1.
