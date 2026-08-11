@@ -26,4 +26,4 @@ Important inputs:
 - `--minMAF=0.05`: please set for common variants only
 
 Main-effect results use `BETA`, `SE`, and `p.value`. Dynamic interaction
-results follow the order of `--dynamicCovarColList` supplied in Step 1.
+results are in columns`*_ge`, comma separated, following the order of `--dynamicCovarColList` supplied in Step 1.
