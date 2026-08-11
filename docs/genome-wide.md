@@ -6,7 +6,7 @@ nav_order: 4
 permalink: /docs/HPC example/
 ---
 
-# Example scripts on running one gene on HPC using apptainer
+# Example scripts for running one gene on HPC using apptainer
 
 ## Pull sif file on HPC
 Pull sif file using apptainer/singularity (this might take a while)
