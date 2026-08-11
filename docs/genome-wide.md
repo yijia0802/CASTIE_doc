@@ -171,12 +171,11 @@ run with `bash step2.sh {gene} {cell_type}`
 concat_step2_results.py \
   --input-dir=/path/to/your/results/step2/ \
   --output=/path/to/your/results/step2/step3_input.txt \
-  --contexts=pf1,pf2 \
-  --file-pattern='*_cis' \
-  --gene-regex='^(?P<gene>.+)_cis$' \
-  --maf-min=0.05 \
-  --maf-max=0.95
+  --contexts=age,sex,CD4.Naive,CD4.CM,Th1.Like,Th2.Resting,Th2.Activated,Th17.Activated,Th22,Tfh.1,Tfh.2,Tph,CD8.EM,CD8.Trm,TEMRA,MAIT,Cytotoxic,Exhaustion,CellCycle.S,CellCycle.G2M \
+  --file-pattern='*.parquet' \
+  --gene-regex='^(?P<gene>.+)_0[.]2[.]5[.]8[.]parquet$'
 ```
+
 ## CASTIE step 3 (only needed if you have > 1 gene)
 
 example script
