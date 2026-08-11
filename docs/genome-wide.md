@@ -173,7 +173,9 @@ concat_step2_results.py \
   --output=/path/to/your/results/step2/step3_input.txt \
   --contexts=age,sex,CD4.Naive,CD4.CM,Th1.Like,Th2.Resting,Th2.Activated,Th17.Activated,Th22,Tfh.1,Tfh.2,Tph,CD8.EM,CD8.Trm,TEMRA,MAIT,Cytotoxic,Exhaustion,CellCycle.S,CellCycle.G2M \
   --file-pattern='*.parquet' \
-  --gene-regex='^(?P<gene>.+)_0[.]2[.]5[.]8[.]parquet$'
+  --gene-regex='^(?P<gene>.+)_0[.]2[.]5[.]8[.]parquet$' \
+  --maf-min=0.05 \
+  --maf-max=0.95
 ```
 
 ## CASTIE step 3 (only needed if you have > 1 gene)
