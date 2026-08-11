@@ -280,4 +280,9 @@ equals its p-value; meaningful FDR estimation requires a real multi-gene run.
 ## Support
 
 For questions, contact Christiana Liu at
-[liuyijia@broadinstitute.org](mailto:liuyijia@broadinstitute.org).
+[liuyijia@broadinstitute.org](mailto:liuyijia@broadinstitute.org) or
+[open an issue on GitHub](https://github.com/ZhouLabGenetics/CASTIE/issues).
+
+## Citation
+
+Preprint coming soon.
