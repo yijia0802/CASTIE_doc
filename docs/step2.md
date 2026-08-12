@@ -24,6 +24,7 @@ Important inputs:
 - `--SAIGEOutputFile`: output path for variant-level results
 - `--output_format`: output format, default = parquet, can switch to txt
 - `--minMAF=0.05`: please set for common variants only
+- `--pval_cutoff_for_gxe`: main-effect p-value cutoff for running GxC tests, default = 0.001, please set to 1 if wanting to test all GxCs.
 
 Main-effect results use `BETA`, `SE`, and `p.value`. Dynamic interaction
 results are in columns`*_ge`, comma separated, following the order of `--dynamicCovarColList` supplied in Step 1.
