@@ -406,4 +406,4 @@ For questions, contact Christiana Liu at
 
 ## Citation
 
-Preprint coming soon.
+Liu et al., 2026: https://www.medrxiv.org/content/10.64898/2026.08.13.26360300v1
