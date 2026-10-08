@@ -61,3 +61,4 @@ vary between cells.
 
 The chromosome, start, and end columns can be used to construct the cis-region
 file supplied to Step 2.
+For gene names with a dash "-", please change it to an underscore "_" for data processing. 
